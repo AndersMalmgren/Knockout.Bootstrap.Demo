@@ -1,0 +1,49 @@
+﻿<p><strong>Knockout.Bootstrap</strong> is a template bootstrapper for Single page applications.</p>
+<p>It utilizes a library called <a target="_blank" href="https://github.com/AndersMalmgren/Knockout.BindingConventions">Knockout.BindingConventions</a> 
+    which enables the library to resolve view names by ViewModel types.<br/>
+It understands that a ViewModel named CustomerViewModel should be connected to a view called CustomerView</p>
+
+<p>The template bootstrapper is initialized like this
+    <pre><code data-language="javascript">MasterViewModel = function() {
+        this.bootstrap = ko.bootstrap.init(this, this.appStart.bind(this));
+    };
+    </code></pre>
+</p>
+
+<p>The object you send in as first argument must have a function called loadTemplates. This function is used to call for templates on the server.<br/>
+
+When the shared templates have been loaded the appStart function will be called and you can start your app</p>
+
+<p>When you want to load a view you just call
+    <pre><code data-language="javascript">this.bootstrap.loadView(model, this.view);</code></pre>
+</p>
+
+
+<p>The first argument is the ViewModel instance and the second a callback (Or observable) that the boostrapper calls when the template(s) for the view is loaded.<br/>
+    If the ViewModel sent to loadView is named <em>CustomerViewModel</em> then all views belonging to a root called <em>Customer</em> will be loaded</p>
+<p>
+    The file system on server could look like this. Please see the WebAPI example in this Web project to see how a service can be implemented
+    <ul>
+        <li>Views
+            <ul>
+                <li>Customer
+                    <ul>
+                        <li>CustomerView.html</li>
+                        <li>ProjectFeeCalculatorView.html</li>
+                    </ul>
+                </li>
+                <li>Shared
+                    <ul>
+                        <li>MasterView.html</li>
+                        <li>DatePickerView.html</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</p>
+
+<h4>Source</h4>
+<a href="https://github.com/AndersMalmgren/Knockout.Bootstrap">https://github.com/AndersMalmgren/Knockout.Bootstrap</a>
+
+<!-- ko rainbow: true --><!-- /ko -->
