@@ -5,8 +5,8 @@ It understands that a ViewModel named CustomerViewModel should be connected to a
 
 <p>The template bootstrapper is initialized like this
     <pre><code data-language="javascript">MasterViewModel = function() {
-        this.bootstrap = ko.bootstrap.init(this, this.appStart.bind(this));
-    };</code></pre>
+    this.bootstrap = ko.bootstrap.init(this, this.appStart.bind(this));
+};</code></pre>
 </p>
 
 <p>The object you send in as first argument must have a function called loadTemplates. This function is used to call for templates on the server.<br/>
