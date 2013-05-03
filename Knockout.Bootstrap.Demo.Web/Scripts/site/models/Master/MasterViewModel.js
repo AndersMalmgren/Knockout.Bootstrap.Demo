@@ -61,10 +61,7 @@ Demo.MasterViewModel = Demo.define({
             Demo.modelLoader(model, onload);
         },
         loadTemplates: function (root, callback) {
-            $.getJSON("api/template", { root: root }, function(data) {
-
-                callback(data);
-            });
+            $.getJSON("api/template", { root: root }, callback);
         }
     }
 });
