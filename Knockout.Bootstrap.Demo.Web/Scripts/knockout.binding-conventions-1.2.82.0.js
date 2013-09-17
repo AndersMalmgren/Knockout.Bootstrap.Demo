@@ -60,7 +60,7 @@
         getBindings: function (node, bindingContext) {
             var name = this.getMemberName(node);
 
-            var result = ko.bindingHandlers[name] ? null : this.orgBindingProvider.getBindings(node, bindingContext);
+            var result = (name != null && node.nodeType === 8) ? null : this.orgBindingProvider.getBindings(node, bindingContext);
             if (name != null) {
                 result = result || {};
                 setBindingsByConvention(name, node, bindingContext, result);
@@ -82,8 +82,11 @@
 
     var setBindingsByConvention = function (name, element, bindingContext, bindings) {
         var data = bindingContext[name] ? bindingContext[name] : bindingContext.$data[name];
-        if (data == null) {
+        if (data === undefined) {
             data = getDataFromComplexObjectQuery(name, bindingContext.$data);
+        }
+        if (data === undefined) {
+            throw "Can't resolve member: " + name;
         }
         var unwrapped = ko.utils.unwrapObservable(data);
         var type = typeof unwrapped;
@@ -189,7 +192,7 @@
     };
 
     ko.bindingConventions.conventionBinders.text = {
-        rules: [function (name, element, bindings, unwrapped, type) { return type !== "object" && type !== "boolean" && element.tagName !== "INPUT" && element.tagName !== "TEXTAREA" && !nodeHasContent(element); } ],
+        rules: [function (name, element, bindings, unwrapped, type) { return type !== "object" && type !== "boolean" && element.tagName !== "IMG" && element.tagName !== "INPUT" && element.tagName !== "TEXTAREA" && !nodeHasContent(element); } ],
         apply: function (name, element, bindings, unwrapped, type, data) {
             bindings.text = data;
         },
@@ -246,6 +249,14 @@
         deferredApplyIfDataNotSet: true
     };
 
+    ko.bindingConventions.conventionBinders.image = {
+        rules: [function (name, element, bindings, unwrapped, type) { return type === "string" && element.tagName === "IMG"; } ],
+        apply: function (name, element, bindings, unwrapped, type, data) {
+            bindings.attr = { src: data };
+        },
+        deferredApplyIfDataNotSet: true
+    };
+
     var getPascalCased = function (text) {
         return text.substring(0, 1).toUpperCase() + text.substring(1);
     };
@@ -279,8 +290,20 @@
     };
 
     var nodeHasContent = function (node) {
-        return (node.nodeType === 8 && node.nextSibling.nodeType === 1) ||
-            (node.nodeType === 1 && node.innerHTML.trim() !== "");
+        if (node.__nodeHasContent !== undefined) return node.__nodeHasContent;
+
+        return node.__nodeHasContent = (node.nodeType === node.COMMENT_NODE && (node.nextSibling.nodeType === node.ELEMENT_NODE || hasContentBeforeEndTag(node))) ||
+            (node.nodeType === node.ELEMENT_NODE && node.innerHTML.trim() !== "");
+    };
+
+    var hasContentBeforeEndTag = function (node) {
+        if (node.nextSibling.nodeType === node.COMMENT_NODE && node.nextSibling.textContent.indexOf("/ko") > -1)
+            return false;
+
+        if (node.nextSibling.nodeType === node.nextSibling.ELEMENT_NODE || node.nextSibling.textContent.trim() !== "")
+            return true;
+
+        return hasContentBeforeEndTag(node.nextSibling);
     };
 
     var preCheckConstructorNames = function () {
@@ -397,6 +420,7 @@
     ko.bindingConventions.utils = {
         findConstructorName: findConstructorName,
         singularize: singularize,
-        getPascalCased: getPascalCased
+        getPascalCased: getPascalCased,
+        nodeHasContent: nodeHasContent
     };
 })(window, ko);
