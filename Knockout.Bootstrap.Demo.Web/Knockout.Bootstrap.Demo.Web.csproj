@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Knockout.Bootstrap.Demo.Web</RootNamespace>
     <AssemblyName>Knockout.Bootstrap.Demo.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -211,7 +211,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="index.html" />
+    <None Include="index.cshtml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -227,8 +227,12 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\knockout-2.2.1.debug.js" />
-    <Content Include="Scripts\knockout-2.2.1.js" />
+    <Content Include="Scripts\knockout-2.3.0.debug.js" />
+    <Content Include="Scripts\knockout-2.3.0.js" />
+    <Content Include="Scripts\knockout.binding-conventions-1.0.68.0.js" />
+    <Content Include="Scripts\knockout.binding-conventions-1.0.68.0.min.js" />
+    <Content Include="Scripts\knockout.bootstrap-1.0.7.0.js" />
+    <Content Include="Scripts\knockout.bootstrap-1.0.7.0.min.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
@@ -239,6 +243,7 @@
     <Content Include="Scripts\site\models\Home\HomeViewModel.js" />
     <Content Include="Scripts\site\models\Master\MasterViewModel.js" />
     <Content Include="Scripts\site\models\Test\TestViewModel.js" />
+    <Content Include="Scripts\site\utils.js" />
     <Content Include="Views\Home\HomeView.html" />
     <Content Include="Views\Shared\MasterView.html" />
     <Content Include="Views\Test\TestView.html" />

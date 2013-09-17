@@ -1,0 +1,16 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    @Styles.Render("~/Content/css")
+</head>
+    <body>
+        <!-- ko name: $data --><!-- /ko -->
+        @Scripts.Render("~/bundles/vendor")
+        
+        <!-- models -->
+        @Scripts.Render("~/bundles/site")
+    </body>
+</html>
+
