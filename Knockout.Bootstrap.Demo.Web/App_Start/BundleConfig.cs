@@ -22,7 +22,7 @@ namespace Knockout.Bootstrap.Demo.Web
                 "~/Scripts/knockout.bootstrap-{version}.js",
                 "~/Scripts/knockout.mapping-latest.js",
                 "~/Scripts/sammy-{version}.js",
-                "~/Scripts/rainbow-custom.min.js"
+                "~/Scripts/rainbow-custom.js"
                             ));
 
             bundles.Add(new ScriptBundle("~/bundles/site").IncludeDirectory("~/Scripts/site", "*.js", true));
