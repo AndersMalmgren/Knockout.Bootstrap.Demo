@@ -7,6 +7,9 @@
     },
     prototype: {
         appStart: function () {
+            ko.bindingConventions.init({ roots: [Demo] });
+            ko.applyBindings(this);
+            
             Sammy(function (sammmy) {
                 sammmy.get("#:model", function (route) {
                     this.loadView(route.params.model);
@@ -16,9 +19,6 @@
                     this.loadView("Home");
                 }.bind(this));
             }.bind(this)).run();
-
-            ko.bindingConventions.init({ roots: [Demo] });
-            ko.applyBindings(this);
         },
         loadView: function (route) {
             var model = Demo[route + "ViewModel"];
