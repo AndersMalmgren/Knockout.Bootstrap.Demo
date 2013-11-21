@@ -1,9 +1,7 @@
 ﻿Demo.MasterViewModel = Demo.define({
-    init: function (version) {
+    init: function () {
         this.view = ko.observable();
-        this.version = version;
-
-        this.bootstrap = ko.bootstrap.init(this, this.appStart.bind(this));
+        this.bootstrap = ko.bootstrap.init(this.appStart.bind(this));
     },
     prototype: {
         appStart: function () {
@@ -30,11 +28,8 @@
             }.bind(this);
 
             Demo.modelLoader(model, onload);
-        },
-        loadTemplates: function (root, callback) {
-            $.getJSON("api/template", { root: root }, callback);
         }
     }
 });
 
-Demo.modelLoader(Demo.MasterViewModel)
+$(document).ready(function () { Demo.modelLoader(Demo.MasterViewModel); });

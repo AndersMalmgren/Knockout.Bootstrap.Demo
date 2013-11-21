@@ -1,21 +1,22 @@
-﻿ko.bootstrap = (function () {
-    if (window.ko === undefined)
+﻿ko.bootstrap = (function (ko) {
+    if (ko == undefined)
         throw "ko.bootstrap is dependant on knockout";
 
-    if (window.ko.bindingConventions === undefined)
+    if (ko.bindingConventions == undefined)
         throw "ko.bootstrap is dependant on ko.bindingConventions";
 
-    Api = function (datasource, appstart) {
+    var api = function (appstart, url) {
         this.shared = "shared";
         this.currentView = null;
-        this.datasource = datasource;
         this.templateCache = {};
+
+        this.url = url || "templates";
 
         this.initEngine();
         this.loadTemplates(this.shared, appstart);
     };
 
-    Api.prototype = {
+    api.prototype = {
         initEngine: function () {
             var stringTemplateEngine = new ko.nativeTemplateEngine();
             var self = this;
@@ -25,19 +26,18 @@
             };
 
             ko.setTemplateEngine(stringTemplateEngine);
-
         },
         loadTemplates: function (root, callback) {
             var onLoaded = function (loaded) {
                 this.templateCache[root] = loaded;
                 this.currentView = loaded;
                 callback();
-            } .bind(this);
+            }.bind(this);
 
             if (this.templateCache[root] !== undefined) {
                 onLoaded(this.templateCache[root]);
             } else {
-                this.datasource.loadTemplates(root, onLoaded.bind(this));
+                $.getJSON(this.url, { root: root }, onLoaded.bind(this));
             }
         },
         loadView: function (model, callback) {
@@ -72,8 +72,7 @@
 
     return {
         init: function (datasource, appstart) {
-            return new Api(datasource, appstart);
+            return new api(datasource, appstart);
         }
     };
-})();
-
+})(ko = window.ko);

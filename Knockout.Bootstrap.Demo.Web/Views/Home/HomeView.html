@@ -4,16 +4,36 @@
     It understands that a ViewModel named <em>CustomerViewModel</em> should be connected to a view called <em>CustomerView</em>
 </p>
 
-<p>The template bootstrapper is initialized like this
-    <pre><code data-language="javascript">MasterViewModel = function() {
-    this.bootstrap = ko.bootstrap.init(this, this.appStart.bind(this));
-};</code></pre>
+<h4>ASP.NET</h4>
+<p>For Asp.Net install the template store using this command
+    <pre>Install-Package Knockout.Bootstrap.TemplateStore.SystemWeb</pre>
+</p>
+<p>The library uses Owin to support both System.Web sites and self hosted Owin sites. For ASP.NET use this Owin Start class
+    <pre><code data-language="javascript">[assembly: OwinStartup(typeof(TemplateStoreConfig))]
+namespace Knockout.Bootstrap.Demo.Web.App_Start
+{
+    public static class TemplateStoreConfig
+    {
+        public static void Configuration(IAppBuilder app)
+        {
+            app.InitTemplateStore();
+        }
+    }
+}</code></pre>
+</p>
+<p>For self hosted apps install
+    <pre>Install-Package Knockout.Bootstrap.TemplateStore</pre>
+</p>
+<h4>Client</h4>
+<p>Install the client using
+    <pre>Install-Package Knockout.Bootstrap.TemplateStore.Client</pre>
 </p>
 
-<p>The object you send in as first argument must have a function called loadTemplates. This function is used to call for templates on the server.<br/>
-    The format of the returned object should look like
-    <pre><code data-language="javascript">{ CustomerView: "Template Content" }</code></pre>
-    When the shared templates have been loaded the appStart function will be called and you can start your app
+<p>The template bootstrapper is initialized like this
+    <pre><code data-language="javascript">MasterViewModel = function() {
+    this.bootstrap = ko.bootstrap.init(this.appStart.bind(this));
+};</code></pre>
+    When the shared templates have been loaded the <em>appStart</em> function will be called.
 </p>
 
 <p>When you want to load a view you just call
@@ -24,7 +44,7 @@
 <p>The first argument is the ViewModel instance and the second a callback (Or observable) that the boostrapper calls when the template(s) for the view is loaded.<br/>
     If the ViewModel sent to loadView is named <em>CustomerViewModel</em> then all views belonging to a root called <em>Customer</em> will be loaded</p>
 <p>
-    The file system on server could look like this. Please see the WebAPI example in this Web project to see how a service can be implemented
+    The file system on server could look like this.
     <ul>
         <li>Views
             <ul>
@@ -46,6 +66,6 @@
 </p>
 
 <h4>Source</h4>
-<a target="_blank" href="https://github.com/AndersMalmgren/Knockout.Bootstrap">https://github.com/AndersMalmgren/Knockout.Bootstrap</a>
+<a target="_blank" href="https://github.com/AndersMalmgren/Knockout.Bootstrap.TemplateStore">https://github.com/AndersMalmgren/Knockout.Bootstrap.TemplateStore</a>
 
 <!-- ko rainbow: true --><!-- /ko -->
