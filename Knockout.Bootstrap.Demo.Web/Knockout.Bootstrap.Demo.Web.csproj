@@ -192,11 +192,13 @@
     <Content Include="Scripts\sammy-0.7.4.js" />
     <Content Include="Scripts\sammy-0.7.4.min.js" />
     <Content Include="Scripts\site\Knockout.Bindings.js" />
+    <Content Include="Scripts\site\models\Home\HeroViewModel.js" />
     <Content Include="Scripts\site\models\Home\HomeViewModel.js" />
     <Content Include="Scripts\site\models\Master\MasterViewModel.js" />
     <Content Include="Scripts\site\models\Test\TestViewModel.js" />
     <Content Include="Scripts\site\utils.js" />
     <Content Include="Views\Home\HomeView.html" />
+    <Content Include="Views\Home\HeroView.htm" />
     <Content Include="Views\Shared\MasterView.html" />
     <Content Include="Views\Test\TestView.html" />
     <Content Include="Web.config" />
