@@ -11,7 +11,7 @@
     <pre>Install-Package Knockout.Bootstrap.TemplateStore.SystemWeb</pre>
 </p>
 <p>The library uses Owin to support both System.Web sites and self hosted Owin sites. For ASP.NET use this Owin Start class
-    <pre><code data-language="javascript">[assembly: OwinStartup(typeof(TemplateStoreConfig))]
+    <pre><code data-language="csharp">[assembly: OwinStartup(typeof(TemplateStoreConfig))]
 namespace Knockout.Bootstrap.Demo.Web.App_Start
 {
     public static class TemplateStoreConfig
@@ -43,7 +43,7 @@ namespace Knockout.Bootstrap.Demo.Web.App_Start
 </p>
 
 
-<p>The first argument is the ViewModel instance and the second a callback (Or observable) that the boostrapper calls when the template(s) for the view is loaded.<br/>
+<p>The first argument is the ViewModel instance and the second a callback (Or observable) that the bootstrapper calls when the template(s) for the view is loaded.<br/>
     If the ViewModel sent to loadView is named <em>CustomerViewModel</em> then all views belonging to a root called <em>Customer</em> will be loaded</p>
 <p>
     The file system on server could look like this.
